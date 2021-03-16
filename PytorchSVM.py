@@ -144,38 +144,9 @@ def fit(net, X, y, n_epochs=5000):
         losslist.append(risk.item())
     return losslist
 
-def plot_cafe_loss():
-    '''
-    Trains a CAFENet on the CAFE dataset and plots the zero'th through 200'th
-    epoch's losses after training. Saves the trained network for use in
-    visualize_weights.
-    '''
-    x_data1,y_data1 = hw2_utils.get_cafe_data()
 
-    net1 = CAFENet()
-    loss1 = fit(net1, x_data1, y_data1)
-    plt.plot(loss1[:200])
-    torch.save(net1, cafelosspt)
-    pass
 
-def visualize_weights():
-    '''
-    Loads the CAFENet trained in plot_cafe_loss, maps the weights to the grayscale
-    range, reshapes the weights into the original CAFE image dimensions, and
-    plots the weights, displaying the six weight tensors corresponding to the six
-    labels.
-    '''
-    data_set = torch.load(cafelosspt)
-    layer = next(cafelosspt.parameters())
-    min_weight = cafelosspt.layer[1].weight
-    max_weight = cafelosspt.layer[1].weight
-    for i in range(1,7):
-        if cafelosspt.layer[i].weight < min_weight:
-            min_weight = cafelosspt.layer[i].weight
-        if cafelosspt.layer[i].weight > min_weight:
-            min_weight = cafelosspt.layer[i].weight
-    
-    pass
+
 
 class DigitsConvNet(nn.Module):
     def __init__(self):
